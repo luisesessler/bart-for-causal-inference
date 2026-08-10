@@ -11,8 +11,8 @@ for (dgp_index in tuning_dgps) {
   results_df$model <- case_when(
     tolower(results_df$model) == "bart_s-learner" ~ "BART/S-learner",
     tolower(results_df$model) == "bart_t-learner" ~ "BART/T-learner",
-    tolower(results_df$model) == "bart_ps-glm" ~ "PS-BART/GLM",
-    tolower(results_df$model) == "bart_ps-bart" ~ "PS-BART/BART",
+    tolower(results_df$model) == "bart_ps-glm" ~ "BART/PS-GLM",
+    tolower(results_df$model) == "bart_ps-bart" ~ "BART/PS-BART",
     tolower(results_df$model) == "causal_forest" ~ "Causal forest",
     tolower(results_df$model) == "aipw" ~ "AIPW",
     TRUE ~ results_df$model
@@ -22,8 +22,8 @@ for (dgp_index in tuning_dgps) {
   results_df$model <- factor(results_df$model, levels = c(
     "BART/S-learner",
     "BART/T-learner",
-    "PS-BART/GLM",
-    "PS-BART/BART",
+    "BART/PS-GLM",
+    "BART/PS-BART",
     "Causal forest",
     "AIPW"
   ))

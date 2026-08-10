@@ -3,8 +3,8 @@ results_df <- read.csv(paste0(PATH_RESULTS, "aggregated_metrics_per_dgp.csv"))
 results_df$model <- case_when(
   tolower(results_df$model) == "bart_s-learner" ~ "BART/S-learner",
   tolower(results_df$model) == "bart_t-learner" ~ "BART/T-learner",
-  tolower(results_df$model) == "bart_ps-glm" ~ "PS-BART/GLM",
-  tolower(results_df$model) == "bart_ps-bart" ~ "PS-BART/BART",
+  tolower(results_df$model) == "bart_ps-glm" ~ "BART/PS-GLM",
+  tolower(results_df$model) == "bart_ps-bart" ~ "BART/PS-BART",
   tolower(results_df$model) == "causal_forest" ~ "Causal forest",
   tolower(results_df$model) == "aipw" ~ "AIPW",
   TRUE ~ results_df$model
@@ -13,8 +13,8 @@ results_df$model <- case_when(
 results_df$model <- factor(results_df$model, levels = c(
   "BART/S-learner",
   "BART/T-learner",
-  "PS-BART/GLM",
-  "PS-BART/BART",
+  "BART/PS-GLM",
+  "BART/PS-BART",
   "Causal forest",
   "AIPW"
 ))
@@ -23,7 +23,7 @@ results_df$model <- factor(results_df$model, levels = c(
 results_df$dgp <- results_df$dgp %>% str_remove("dgp")
 
 
-#--------------- BOXPLOTS
+# Boxplots
 
 boxplot_rmse <- ggplot(results_df, aes(x = model, y = rmse_rel)) + 
   geom_boxplot() +
@@ -54,9 +54,9 @@ boxplot_ci <- ggplot(results_df, aes(x = model, y = ci_rel)) +
   theme_minimal(base_size = 18)
 
 
-#----------------- Scatterplots
+# Scatterplots
 
-# Average RMSE over DGPS
+
 scatterplot_rmse <- ggplot(results_df %>% filter(coverage > 0.1), aes(x = dgp, y = rmse_rel,
                                               col = model)) +
   geom_beeswarm(size = 2) +
@@ -68,7 +68,7 @@ scatterplot_rmse <- ggplot(results_df %>% filter(coverage > 0.1), aes(x = dgp, y
   scale_color_brewer(palette="Accent")
 
 
-# Average Coverage over DGPS
+
 scatterplot_coverage <- ggplot(results_df %>% filter(coverage > 0.1), aes(x = dgp, y = coverage,
                                               col = model)) +
   geom_beeswarm(size = 2) +
@@ -80,7 +80,7 @@ scatterplot_coverage <- ggplot(results_df %>% filter(coverage > 0.1), aes(x = dg
   scale_color_brewer(palette="Accent")
 
 
-# Average CI Length
+
 scatterplot_ci <- ggplot(results_df, aes(x = dgp, y = ci_rel,
                    col = model)) +
   geom_beeswarm(size = 2) +
@@ -92,7 +92,6 @@ scatterplot_ci <- ggplot(results_df, aes(x = dgp, y = ci_rel,
   scale_color_brewer(palette="Accent")
 
 
-# Save plots
 
 plots <- list(
   boxplot_rmse = boxplot_rmse,
