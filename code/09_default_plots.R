@@ -59,7 +59,7 @@ boxplot_ci <- ggplot(results_df, aes(x = model, y = ci_rel)) +
 
 scatterplot_rmse <- ggplot(results_df %>% filter(coverage > 0.1), aes(x = dgp, y = rmse_rel,
                                               col = model)) +
-  geom_beeswarm(size = 2) +
+  geom_beeswarm(size = 2, cex = 1.2) +
   labs(x = "DGP", y = "Relative RMSE", col = "Model")+
   theme(
     text = element_text(size = 16),
@@ -71,7 +71,7 @@ scatterplot_rmse <- ggplot(results_df %>% filter(coverage > 0.1), aes(x = dgp, y
 
 scatterplot_coverage <- ggplot(results_df %>% filter(coverage > 0.1), aes(x = dgp, y = coverage,
                                               col = model)) +
-  geom_beeswarm(size = 2) +
+  geom_beeswarm(size = 2, cex = 1.2) +
   labs(x = "DGP", y = "Coverage", col = "Model")+
   theme(
     text = element_text(size = 16),
@@ -83,7 +83,7 @@ scatterplot_coverage <- ggplot(results_df %>% filter(coverage > 0.1), aes(x = dg
 
 scatterplot_ci <- ggplot(results_df, aes(x = dgp, y = ci_rel,
                    col = model)) +
-  geom_beeswarm(size = 2) +
+  geom_beeswarm(size = 2, cex = 1.2) +
   labs(x = "DGP", y = "Relative interval length", col = "Model")+
   theme(
     text = element_text(size = 16),
